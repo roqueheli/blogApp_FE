@@ -6,7 +6,8 @@ const Blogs = ({ blogs, setBlogs, userLogged, setMessage }) => {
     async function fetchData() {
       try {
         const blogs = await reviews.getAllById(userLogged.token, userLogged.id);
-        setBlogs(blogs);
+        console.log(blogs.data);
+        setBlogs(blogs.data);
       } catch (error) {
         setMessage(`error: ${error}`);
       };

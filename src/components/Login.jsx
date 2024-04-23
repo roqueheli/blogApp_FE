@@ -17,8 +17,8 @@ const Login = ({ setUserLogged, setMessage }) => {
     e.preventDefault();
     try {
       const user = await userService.login(loginValues);
-      setUserLogged(user);
-      window.localStorage.setItem('loggedBlogUser', JSON.stringify(user));
+      setUserLogged(user.data);
+      window.localStorage.setItem('loggedBlogUser', JSON.stringify(user.data));
       setLoginValues(initValues);
     } catch (error) {
       setMessage(`error: wrong user or password`);
