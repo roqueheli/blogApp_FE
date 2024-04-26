@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import userService from '../services/login';
+import PropTypes from 'prop-types';
 
 const Login = ({ setUserLogged, setMessage }) => {
   const initValues = { username: '', password: '' };
@@ -52,6 +53,11 @@ const Login = ({ setUserLogged, setMessage }) => {
       </form>
     </>
   );
+};
+
+Login.propsTypes = {
+  setUserLogged: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
 };
 
 export default Login;
