@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import blogsService from '../../services/blogs';
+import blogsService from '../services/blogs';
 
-const NewBlogs = ({ userLogged, setMessage, setBlogs }) => {
+const NewBlogs = ({ userLogged, setMessage, setBlogs, newBlogsRef }) => {
   const initValues = { tittle: '', author: '', url: '' };
   const [newBlog, setNewBlog] = useState(initValues);
 
@@ -16,8 +16,9 @@ const NewBlogs = ({ userLogged, setMessage, setBlogs }) => {
   const handleNew = async (e) => {
     e.preventDefault();
     try {
+      newBlogsRef.current.toggleVisibility();
       const newBlogs = await blogsService.create(userLogged?.token, newBlog);
-      setBlogs(newBlogs);
+      setBlogs(newBlogs.data);
       setMessage(`a new blog ${newBlog.tittle} by ${newBlog.author} added`);
       setNewBlog(initValues);
     } catch (error) {
@@ -27,7 +28,7 @@ const NewBlogs = ({ userLogged, setMessage, setBlogs }) => {
 
   return (
     <>
-        <h1>Create new</h1>
+        <h1>Create a new blog</h1>
         <form onSubmit={handleNew}>
         <input
             type='text'

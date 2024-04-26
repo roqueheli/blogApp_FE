@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Login from "./components/Login";
 import Blogs from "./components/Blogs";
 import Notification from "./components/Notification";
 import User from "./components/User";
 import NewBlogs from "./components/NewBlogs";
+import Togglable from "./components/Togglable";
 
 function App() {
   const [userLogged, setUserLogged] = useState(null);
   const [message, setMessage] = useState(null);
   const [blogs, setBlogs] = useState(null);
-
+  const newBlogsRef = useRef();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogUser');
@@ -27,12 +28,16 @@ function App() {
         <>
           <User userLogged={userLogged} setUserLogged={setUserLogged} />
           <br />
-          <Blogs blogs={blogs} setBlogs={setBlogs} userLogged={userLogged} setMessage={setMessage} />
+          <Togglable buttonLabel={'new note'} ref={newBlogsRef}>
+            <NewBlogs userLogged={userLogged} setMessage={setMessage} setBlogs={setBlogs} newBlogsRef={newBlogsRef} />
+          </Togglable>
           <br />
-          <NewBlogs userLogged={userLogged} setMessage={setMessage} setBlogs={setBlogs} />
+          <Blogs blogs={blogs} setBlogs={setBlogs} userLogged={userLogged} setMessage={setMessage} />
         </>
       ) : (
-        <Login setUserLogged={setUserLogged} setMessage={setMessage} />
+        <Togglable buttonLabel={'login'}>
+          <Login setUserLogged={setUserLogged} setMessage={setMessage} />
+        </Togglable>
       )}
     </>
   );

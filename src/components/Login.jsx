@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import userService from '../../services/login';
+import userService from '../services/login';
 
 const Login = ({ setUserLogged, setMessage }) => {
   const initValues = { username: '', password: '' };
@@ -23,29 +23,34 @@ const Login = ({ setUserLogged, setMessage }) => {
     } catch (error) {
       setMessage(`error: wrong user or password`);
       setLoginValues(initValues);
-    };
+    }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type='text'
-        name='username'
-        placeholder='Username'
-        onChange={handleUserChange}
-        value={loginValues.username}
-      />
-      <br />
-      <input
-        type='password'
-        name='password'
-        placeholder='Password'
-        onChange={handleUserChange}
-        value={loginValues.password}
-      />
-      <br />
-      <button type='submit'>Login</button>
-    </form>
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <input
+          type='text'
+          name='username'
+          placeholder='Username'
+          onChange={handleUserChange}
+          value={loginValues.username}
+        />
+        <br />
+        <input
+          type='password'
+          name='password'
+          placeholder='Password'
+          onChange={handleUserChange}
+          value={loginValues.password}
+        />
+        <br />
+        <button onClick={handleLogin} type='submit'>
+          Login
+        </button>
+      </form>
+    </>
   );
 };
 

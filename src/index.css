@@ -17,3 +17,19 @@
     padding: 10px;
     margin-bottom: 10px;
 }
+
+.list-blog {
+    padding: 0;
+    list-style-type: none;
+}
+
+.blog-view {
+    max-width: 100%;
+    border: 1px black solid;
+    padding: 3px;
+    margin-bottom: 3px;
+    padding-top: 10;
+    padding-left: 2;
+    border-width: 1;
+    margin-bottom: 5;
+}
